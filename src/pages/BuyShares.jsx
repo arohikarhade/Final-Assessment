@@ -3,6 +3,8 @@ import Navigation from '../components/Navigation';
 
 const BuyShares = () => {
     const [selectedShare, setSelectedShare] = useState(null);
+    const [isLoading, setIsLoading] = useState(false); // For loading state
+    const [error, setError] = useState(null); // For error handling
 
     const shares = [
         { company: 'ABC Corp', available: 500, price: 120, flow: 'up' },
@@ -13,10 +15,46 @@ const BuyShares = () => {
 
     const handleRowClick = (share) => {
         setSelectedShare(share);
+        setError(null); // Clear previous errors
     };
 
     const closeModal = () => {
         setSelectedShare(null);
+    };
+
+    // Handle Buy Now functionality
+    const handleBuyNow = async () => {
+        if (!selectedShare) return;
+
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch('https://your-ngrok-url/buy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    company: selectedShare.company,
+                    quantity: 1, // Example quantity; adjust as needed
+                    price: selectedShare.price
+                })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(`Successfully bought 1 share of ${selectedShare.company} at $${selectedShare.price.toFixed(2)}`);
+            } else {
+                throw new Error(result.message || 'Failed to purchase shares.');
+            }
+        } catch (err) {
+            setError(`Error: ${err.message}`);
+        } finally {
+            setIsLoading(false);
+            closeModal();
+        }
     };
 
     return (
@@ -39,7 +77,7 @@ const BuyShares = () => {
                                 <td>{share.company}</td>
                                 <td>{share.available}</td>
                                 <td>${share.price.toFixed(2)}</td>
-                                <td 
+                                <td
                                     className={share.flow === 'up' ? 'upflow' : 'downflow'}
                                 >
                                     {share.flow === 'up' ? '📈 Upward' : '📉 Downward'}
@@ -57,8 +95,22 @@ const BuyShares = () => {
                             <p><strong>Available Shares:</strong> {selectedShare.available}</p>
                             <p><strong>Price per Share:</strong> ${selectedShare.price.toFixed(2)}</p>
                             <p><strong>Status:</strong> {selectedShare.flow === 'up' ? '📈 Upflow' : '📉 Downflow'}</p>
-                            <button className="submit-btn" onClick={closeModal}>Buy Now</button>
-                            <button className="confirm-btn" onClick={closeModal}>Close</button>
+
+                            {error && <p className="error">{error}</p>}
+
+                            <div className="modal-buttons">
+                                <button
+                                    className="submit-btn"
+                                    onClick={handleBuyNow}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Processing...' : 'Buy Now'}
+                                </button>
+
+                                <button className="confirm-btn" onClick={closeModal}>
+                                    Close
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
