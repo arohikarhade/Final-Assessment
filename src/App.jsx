@@ -19,6 +19,9 @@ import Watchlist from "./pages/Watchlist";
 import Portfolio from "./pages/Portfolio";
 import Holdings from "./pages/Holdings";
 import Balance from "./pages/Balance";
+import Trading from "./pages/Trading";
+import BuyShares from "./pages/BuyShares";
+import SellShares from "./pages/SellShares";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -36,6 +39,10 @@ function App() {
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/holdings" element={<Holdings />} />
         <Route path="/balance" element={<Balance />} />
+        <Route path="/trading" element={<Trading />} />
+        <Route path="/buyshares" element={<BuyShares />} />
+        <Route path="/sellshares" element={<SellShares />} />
+
 
         <Route path="/user" element={<Welcome />} />
         <Route path="/user/balance-enquiry" element={<BalanceEnquiry />} />

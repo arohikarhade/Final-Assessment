@@ -28,6 +28,9 @@ function CustomerNavigation() {
           <Link to="/portfolio">Portfolio</Link>
         </li>
         <li>
+          <Link to="/trading">Trading</Link>
+        </li>
+        <li>
           <Link to="/net-banking">Net Banking</Link>
         </li>
         <li>
