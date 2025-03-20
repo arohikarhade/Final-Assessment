@@ -4,8 +4,8 @@ import './components.css'
 function Header() {
   return (
     <header>
-      <h1>OUR BANK</h1>
-      <h3>Banking at Your Doorstep</h3>
+      <h1>HERODHA</h1>
+      <h3></h3>
     </header>
   );
 }

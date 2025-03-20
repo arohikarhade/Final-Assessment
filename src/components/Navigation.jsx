@@ -9,11 +9,8 @@ function Navigation() {
     <h3>Navigation</h3>
     <ul>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/about-us">About Us</Link></li>
         <li><Link to="/portfolio">Portfolio</Link></li>
         <li><Link to="/trading">Trading</Link></li>
-        <li><Link to="/net-banking">Net Banking</Link></li>
-        <li><Link to="/contact-us">Contact Us</Link></li>
     </ul>
 </aside>
   )

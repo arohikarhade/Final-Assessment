@@ -9,7 +9,7 @@ function Home() {
       <div class="container">
         <Navigation />
         <main class="main">
-          <h2>Welcome to Our Bank</h2>
+          <h2>HERODHA</h2>
           <p>
             At Our Bank, we are committed to providing you with the best banking
             experience possible. Our innovative solutions and customer-centric
